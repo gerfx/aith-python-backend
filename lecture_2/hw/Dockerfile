@@ -17,11 +17,11 @@ ENV VIRTUAL_ENV=$APP_ROOT/src/.venv \
     PATH=$APP_ROOT/src/.venv/bin:$PATH
 
 RUN pip install -r requirements.txt
-FROM base AS dev
-COPY . .
-CMD ["uvicorn", "shop_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
+FROM base as dev
 
-# Стадия локальной сборки (при необходимости)
+CMD ["bash", "-c", "while true; do sleep 1; done"]
+
+
 FROM base AS local
-COPY . .
-CMD ["uvicorn", "shop_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+CMD ["uvicorn", "shop_api.main:app", "--port", "8080", "--host", "0.0.0.0"]

@@ -8,7 +8,11 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Optional
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
+
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 # Определение модели товара
 class Item(BaseModel):
